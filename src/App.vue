@@ -2,13 +2,11 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 16:30:07
- * @LastEditTime: 2022-01-02 22:44:50
+ * @LastEditTime: 2022-01-08 16:11:31
  * @LastEditors: Please set LastEditors
 -->
 <template>
-    <div>
-        <router-link to="/login">登录</router-link>
-        <router-link to="/main">首页</router-link>
+    <div class="app">
         <router-view></router-view>
     </div>
 </template>
@@ -23,4 +21,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app {
+    height: 100%;
+}
+</style>

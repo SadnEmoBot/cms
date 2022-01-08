@@ -1,43 +1,37 @@
 <!--
  * @Description:
  * @Author:
- * @Date: 2022-01-02 17:42:36
- * @LastEditTime: 2022-01-04 21:56:49
+ * @Date: 2022-01-08 16:02:04
+ * @LastEditTime: 2022-01-08 16:07:02
  * @LastEditors: Please set LastEditors
 -->
 <template>
-    <div>login</div>
-    <el-button type="primary" @click="getTest">按钮</el-button>
+    <div class="login">
+        <login-panel />
+    </div>
 </template>
 
 <script lang="ts">
-import {
-    defineComponent,
-    getCurrentInstance,
-    ComponentInternalInstance,
-} from "vue"; //不知道是安装了volar还是reload了一遍 不再报错
-
-// 如果const { proxy } = getCurrentInstance() as any的话 不用声明也照样能发送请求
-// declare module "@vue/runtime-core" {
-//     interface ComponentCustomProperties {
-//         $api: any;
-//     }
-// }
+import { defineComponent } from "vue";
+import LoginPanel from "./components/login-panel.vue";
 
 export default defineComponent({
+    components: {
+        LoginPanel,
+    },
     setup() {
-        const { proxy } = getCurrentInstance() as any; // as any的话就不用导入ComponentInternalInstance了
-        const getTest = () => {
-            proxy?.$api["user/getTest"]().then((res: any) => {
-                console.log(res);
-            });
-            proxy?.$message.success("ok");
-        };
-        return {
-            getTest,
-        };
+        return {};
     },
 });
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/login-bg.svg");
+}
+</style>
