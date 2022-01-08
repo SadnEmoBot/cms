@@ -2,12 +2,14 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 13:17:32
- * @LastEditTime: 2022-01-04 22:15:20
+ * @LastEditTime: 2022-01-07 23:03:59
  * @LastEditors: Please set LastEditors
  */
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
+// import router from "./router";
+import router from "./plugins/router";
+
 import store from "./store";
 
 import { ElMessage } from "element-plus"; //引入message组件
