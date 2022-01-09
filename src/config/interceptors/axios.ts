@@ -2,7 +2,7 @@
  * @Description: axios拦截器
  * @Author:
  * @Date: 2022-01-03 15:29:50
- * @LastEditTime: 2022-01-06 15:35:12
+ * @LastEditTime: 2022-01-09 13:41:08
  * @LastEditors: Please set LastEditors
  */
 // import { AxiosRequestConfig } from "axios";
@@ -12,6 +12,8 @@ import { ElLoading } from "element-plus";
 
 import { useRouter } from "vue-router";
 
+import localCache from "@/utils/cache";
+
 let loading: any;
 // let showLoading: boolean;
 
@@ -20,6 +22,11 @@ export function requestSuccessFunc(requestObj: any) {
     // 自定义请求拦截逻辑，可以处理权限，请求发送监控等
 
     // 1.给请求添加token
+    const token = localCache.getCache("token");
+
+    if (token) {
+        requestObj.headers.Authorization = `Bearer ${token}`;
+    }
 
     // 2. isLoading动画
     if (requestObj.showLoading) {

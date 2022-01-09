@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 23:27:20
- * @LastEditTime: 2022-01-06 14:42:37
+ * @LastEditTime: 2022-01-08 23:39:04
  * @LastEditors: Please set LastEditors
  */
 
@@ -10,7 +10,7 @@ const AutoImport = require("unplugin-auto-import/webpack");
 const Components = require("unplugin-vue-components/webpack");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 
-// const configProxy = require("./config/proxy.ts");
+const configProxy = require("./config/proxy.ts");
 const URL_PREFIX = "/cms";
 
 const vueConfig = {
@@ -29,11 +29,20 @@ const vueConfig = {
         ],
     },
     devServer: {
-        port: 8080,
+        // port: 8080,
         open: true,
         hotOnly: true,
-        // proxy: configProxy,
-        proxy: "http://localhost:4000",
+        proxy: configProxy,
+        // proxy: "http://localhost:4000",
+        // proxy: {
+        //     "^/api": {
+        //         target: "http://152.136.185.210:5000",
+        //         pathRewrite: {
+        //             "^/api": "",
+        //         },
+        //         changeOrigin: true,
+        //     },
+        // },
     },
 };
 module.exports = vueConfig;

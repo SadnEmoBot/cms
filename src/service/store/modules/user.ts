@@ -1,0 +1,123 @@
+/*
+ * @Description:
+ * @Author:
+ * @Date: 2022-01-08 18:24:09
+ * @LastEditTime: 2022-01-09 20:17:56
+ * @LastEditors: Please set LastEditors
+ */
+
+// const state = () => ({
+//     token: "", // jwt
+//     userInfo: {}, // 用户信息
+// });
+import api from "@/plugins/api";
+import { Module } from "vuex";
+
+import localCache from "@/utils/cache";
+import router from "@/plugins/router";
+
+interface ILoginState {
+    token: string;
+    userInfo: any;
+    userMenus: any;
+}
+interface IRootState {
+    name: string;
+    age: number;
+}
+let userInfos = {} as any;
+let Commonid = 1;
+let menusId = 1;
+
+const loginModule: Module<ILoginState, IRootState> = {
+    namespaced: true,
+    state() {
+        return {
+            token: "", // jwt
+            userInfo: {}, // 用户信息
+            userMenus: [], // 用户菜单信息
+        };
+    },
+    actions: {
+        accountLoginAction({ commit }, payload: any) {
+            commit("SET_TOKEN", "");
+
+            api["login/authLogin"](payload).then(async (res: any) => {
+                const { id, token } = res.data;
+                Commonid = id;
+                commit("SET_TOKEN", token);
+                localCache.setCache("token", token);
+
+                await Promise.all([
+                    api["user/getUserInfo"]({
+                        id: Commonid,
+                    }),
+                    api["user/getUserMenus"]({
+                        id: menusId,
+                    }),
+                ]).then(([res1, res2]) => {
+                    userInfos = res1.data;
+                    menusId = userInfos.role.id;
+                    commit("SET_USER_INFO", res1.data);
+                    localCache.setCache("userInfo", res1.data);
+
+                    commit("SET_USER_MENUS", res2.data);
+                    localCache.setCache("userMenus", res2.data);
+                });
+            });
+            // // 获取用户信息
+            // api["user/getUserInfo"]({
+            //     id: Commonid,
+            // }).then((res: any) => {
+            //     // console.log(res.data);
+            //     userInfos = res.data;
+            //     commit("SET_USER_INFO", res.data);
+            //     localCache.setCache("userInfo", res.data);
+            // });
+            // //获取用户菜单
+            // api["user/getUserMenus"]({
+            //     id: userInfos.role.id,
+            // }).then((res: any) => {
+            //     console.log(res.data);
+            //     commit("SET_USER_MENUS", res.data);
+            //     localCache.setCache("userMenus", res.data);
+            // });
+
+            // 跳转首页
+            router.push("/main");
+        },
+
+        //加载本地存储数据
+        loadLocalData({ commit }) {
+            const token = localCache.getCache("token");
+            if (token) {
+                commit("SET_TOKEN", token);
+            }
+            const userInfo = localCache.getCache("userInfo");
+            if (userInfo) {
+                commit("SET_USER_INFO", userInfo);
+            }
+            const userMenus = localCache.getCache("userMenus");
+            if (userMenus) {
+                commit("SET_USER_MENUS", userMenus);
+            }
+        },
+    },
+    // 修改state用mutations
+    mutations: {
+        // 设置 token
+        SET_TOKEN(state, resData: string) {
+            state.token = resData;
+        },
+        // 设置用户信息
+        SET_USER_INFO(state, resData: any) {
+            state.userInfo = resData;
+        },
+        // 设置用户菜单信息
+        SET_USER_MENUS(state, resData: any) {
+            state.userMenus = resData;
+        },
+    },
+};
+
+export default loginModule;

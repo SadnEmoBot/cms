@@ -2,7 +2,7 @@
  * @Description: 用户权限 请求接口
  * @Author:
  * @Date: 2022-01-03 16:14:27
- * @LastEditTime: 2022-01-06 15:17:22
+ * @LastEditTime: 2022-01-09 18:35:43
  * @LastEditors: Please set LastEditors
  */
 export default [
@@ -19,5 +19,20 @@ export default [
         path: "/home/multidata",
         host: "cms",
         // showLoading: false,
+    },
+    {
+        name: "getUserInfo",
+        method: "GET",
+        desc: "获取用户信息",
+        path: "/users/{id}",
+        host: "cms",
+        // showLoading: true,
+    },
+    {
+        name: "getUserMenus",
+        method: "GET",
+        desc: "获取用户菜单",
+        path: "/role/{id}/menu",
+        host: "cms",
     },
 ];

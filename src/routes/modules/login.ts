@@ -2,7 +2,7 @@
  * @Description: 登录相关的路由配置
  * @Author:
  * @Date: 2022-01-07 23:08:09
- * @LastEditTime: 2022-01-08 16:11:04
+ * @LastEditTime: 2022-01-09 19:08:31
  * @LastEditors: Please set LastEditors
  */
 // import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
@@ -34,7 +34,7 @@
 export default [
     {
         path: "/",
-        redirect: "/login",
+        redirect: "/main",
     },
     {
         path: "/login",
@@ -43,8 +43,8 @@ export default [
             title: "登录首页",
         },
     },
-    // {
-    //     path: "/main",
-    //     component: () => import("@/views/main/main.vue"),
-    // },
+    {
+        path: "/main",
+        component: () => import("@/views/main/main.vue"),
+    },
 ];

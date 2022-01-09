@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 13:17:32
- * @LastEditTime: 2022-01-08 16:48:55
+ * @LastEditTime: 2022-01-09 20:09:15
  * @LastEditors: Please set LastEditors
  */
 import { createApp } from "vue";
@@ -10,7 +10,8 @@ import App from "./App.vue";
 // import router from "./router";
 import router from "./plugins/router";
 
-import store from "./store";
+// import store from "./store";
+import store from "./plugins/store";
 
 import { ElMessage } from "element-plus"; //引入message组件
 import "element-plus/dist/index.css"; //引入全局样式
@@ -21,6 +22,8 @@ import "./assets/style/index.scss";
 //引入插件
 // import inject from "./plugins/inject";
 import api from "./plugins/api";
+
+store.dispatch("user/loadLocalData");
 
 // createApp(App).use(store).use(router).use(inject).mount("#app");
 const app = createApp(App);
