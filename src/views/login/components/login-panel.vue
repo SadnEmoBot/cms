@@ -2,12 +2,12 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-08 16:07:42
- * @LastEditTime: 2022-01-08 21:41:52
+ * @LastEditTime: 2022-01-10 14:32:29
  * @LastEditors: Please set LastEditors
 -->
 <template>
     <div class="login-panel">
-        <h1 class="title">后台管理系统</h1>
+        <h1 class="title">Euphoria</h1>
         <el-tabs type="border-card" stretch v-model="currentTab">
             <el-tab-pane name="account">
                 <template #label>

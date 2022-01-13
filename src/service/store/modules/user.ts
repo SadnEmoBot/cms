@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-08 18:24:09
- * @LastEditTime: 2022-01-09 20:17:56
+ * @LastEditTime: 2022-01-13 00:36:05
  * @LastEditors: Please set LastEditors
  */
 
@@ -16,15 +16,20 @@ import { Module } from "vuex";
 import localCache from "@/utils/cache";
 import router from "@/plugins/router";
 
-interface ILoginState {
-    token: string;
-    userInfo: any;
-    userMenus: any;
-}
-interface IRootState {
-    name: string;
-    age: number;
-}
+import { ILoginState, IRootState } from "../type";
+
+import { mapMenusToRoutes } from "@/utils/map-menus";
+
+// 改为直接从 type.ts 引入
+// interface ILoginState {
+//     token: string;
+//     userInfo: any;
+//     userMenus: any;
+// }
+// interface IRootState {
+//     name: string;
+//     age: number;
+// }
 let userInfos = {} as any;
 let Commonid = 1;
 let menusId = 1;
@@ -87,7 +92,7 @@ const loginModule: Module<ILoginState, IRootState> = {
             router.push("/main");
         },
 
-        //加载本地存储数据
+        //加载本地存储数据 但是不知道为什么在f12 存储里刷新了vuex还是会有
         loadLocalData({ commit }) {
             const token = localCache.getCache("token");
             if (token) {
@@ -116,6 +121,15 @@ const loginModule: Module<ILoginState, IRootState> = {
         // 设置用户菜单信息
         SET_USER_MENUS(state, resData: any) {
             state.userMenus = resData;
+
+            //userMenus => routes
+            const routes = mapMenusToRoutes(resData);
+            console.log(routes);
+
+            // 将routes 放进 main.children
+            routes.forEach((route) => {
+                router.addRoute("main", route); //这里看下addRoute()
+            });
         },
     },
 };

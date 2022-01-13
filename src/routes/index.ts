@@ -2,13 +2,15 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-07 16:53:37
- * @LastEditTime: 2022-01-07 17:22:34
+ * @LastEditTime: 2022-01-13 01:01:15
  * @LastEditors: Please set LastEditors
  */
 import { importAll } from "@/utils/common";
 
+import type { RouteRecordRaw } from "vue-router";
+
 const routeModules = importAll(
-    require.context("@/routes/modules", false, /\.ts$/)
+    require.context("@/routes/modules", true, /\.ts$/) //新增了一个modules文件夹 把除开login的子文件放进去了 所以这里改true深层遍历
 );
 // // 业务路由
 // const businessRoutes = routeModules.reduce(
@@ -18,26 +20,22 @@ const routeModules = importAll(
 // 完整路由表
 // const routes = [
 //     {
-//         path: "/:code",
-//         component: (resolve) =>
-//             require(["@/components/business/index.vue"], resolve),
-//         // redirect: to => {
-//         //     return `/${to.params.code}/login`;
-//         // },
+//         path: "/login",
+//         component: () => import("@/views/login/login.vue"),
 //         children: businessRoutes,
 //     },
 // ];
-const routes = routeModules.reduce(
+const routes: RouteRecordRaw[] = routeModules.reduce(
     (finallRoutes, routerModule) => finallRoutes.concat(routerModule.module),
     []
-);
+) as any;
 
-// routes.push({
-//     path: "*", // 错误路由[写在最后一个]
-//     component: (resolve) => require(["@/views/404/index.vue"], resolve),
-//     meta: {
-//         requiresAuth: false,
-//     },
-// });
+routes.push({
+    path: "/:pathMatch(.*)*", // 错误路由[写在最后一个] 或者直接路由注册也行
+    component: () => import("@/views/404/404.vue"),
+    meta: {
+        requiresAuth: false,
+    },
+});
 
 export default routes;

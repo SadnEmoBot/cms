@@ -2,7 +2,7 @@
  * @Description: vuex配置 实例化vuex
  * @Author:
  * @Date: 2022-01-08 18:09:37
- * @LastEditTime: 2022-01-09 20:08:42
+ * @LastEditTime: 2022-01-12 21:10:30
  * @LastEditors: Please set LastEditors
  */
 // import Vue from "vue";
@@ -37,6 +37,7 @@ export default createStore({
     plugins: [
         createPersistedState({
             reducer(store: any) {
+                // console.log(JSON.parse(JSON.stringify(store)));
                 return {
                     user: store.user,
                 };

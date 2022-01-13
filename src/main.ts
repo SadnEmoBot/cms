@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 13:17:32
- * @LastEditTime: 2022-01-09 20:09:15
+ * @LastEditTime: 2022-01-12 23:04:14
  * @LastEditors: Please set LastEditors
  */
 import { createApp } from "vue";
@@ -19,6 +19,8 @@ import "element-plus/dist/index.css"; //引入全局样式
 
 import "./assets/style/index.scss";
 
+import * as ElIcons from "@element-plus/icons-vue"; // 是否需要按需导入？https://blog.csdn.net/kzj0916/article/details/121880468
+
 //引入插件
 // import inject from "./plugins/inject";
 import api from "./plugins/api";
@@ -32,5 +34,9 @@ app.config.globalProperties.$api = api;
 
 app.use(ElMessage);
 app.config.globalProperties.$message = ElMessage; //挂载到app实例上
+
+for (const name in ElIcons) {
+    app.component(name, (ElIcons as any)[name]);
+}
 
 app.use(store).use(router).mount("#app");
