@@ -2,10 +2,11 @@
  * @Description: 路由拦截器
  * @Author:
  * @Date: 2022-01-07 17:27:27
- * @LastEditTime: 2022-01-13 10:26:21
+ * @LastEditTime: 2022-01-13 22:54:58
  * @LastEditors: Please set LastEditors
  */
 import localCache from "@/utils/cache";
+import { firstMenu } from "@/utils/map-menus";
 export function routerBeforeEachFunc(to: any) {
     // console.log(to);
 
@@ -31,5 +32,9 @@ export function routerBeforeEachFunc(to: any) {
         if (to.name === "404") {
             to.name = "user";
         }
+    }
+
+    if (to.path === "/main") {
+        return firstMenu.url;
     }
 }

@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-10 01:30:58
- * @LastEditTime: 2022-01-13 01:05:05
+ * @LastEditTime: 2022-01-13 23:32:34
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -12,7 +12,7 @@
             <span v-if="!collapse" class="title">=</span>
         </div>
         <el-menu
-            default-active="2"
+            :default-active="defaultMenu"
             class="el-menu-vertical"
             :collapse="collapse"
             background-color="#0c2135"
@@ -59,12 +59,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { toRaw } from "@vue/reactivity";
 // import { useStore } from "vuex";
 // import { useStore } from "@/plugins/store";
-import { useStore } from "./type";
-import { useRouter } from "vue-router";
+// import { useStore } from "./type";
+import { useStore } from "@/service/store/type";
+import { useRouter, useRoute } from "vue-router";
+import { pathMapToMenu } from "@/utils/map-menus";
 
 // vuex - typescript  => pinia
 
@@ -81,9 +83,14 @@ export default defineComponent({
         //     JSON.stringify(store.state.user.userMenus)
         // );
         const userMenus = toRaw(store.state.user.userMenus);
-        console.log(userMenus);
+        // console.log(userMenus);
 
         const router = useRouter();
+
+        const route = useRoute();
+        const currentPath = route.path; // 1. 拿到url路径 /main/system/menu
+        const menu = pathMapToMenu(userMenus, currentPath); // 2.根据路径currentPath去匹配menu(userMenus)
+        const defaultMenu = ref(menu.id + ""); // 3.拿到menu.id作为el-menu的default-active(要求字符串 所以+"")
 
         const handleMenuItemClick = (item: any) => {
             // console.log(item);
@@ -95,6 +102,7 @@ export default defineComponent({
         return {
             store,
             userMenus,
+            defaultMenu,
             handleMenuItemClick,
         };
     },

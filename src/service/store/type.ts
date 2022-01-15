@@ -2,10 +2,10 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-12 17:22:34
- * @LastEditTime: 2022-01-12 17:27:44
+ * @LastEditTime: 2022-01-13 23:33:37
  * @LastEditors: Please set LastEditors
  */
-import { Store, useStore as userVuexStore } from "vuex";
+import { Store, useStore as useVuexStore } from "vuex";
 
 export interface ILoginState {
     token: string;
@@ -24,5 +24,5 @@ interface IRootWithModule {
 type IStoreType = IRootState & IRootWithModule;
 
 export function useStore(): Store<IStoreType> {
-    return userVuexStore();
+    return useVuexStore();
 }

@@ -2,10 +2,13 @@
  * @Description: 根据权限动态配置菜单路由
  * @Author:
  * @Date: 2022-01-12 23:24:28
- * @LastEditTime: 2022-01-13 00:35:03
+ * @LastEditTime: 2022-01-14 17:41:43
  * @LastEditors: Please set LastEditors
  */
+import { IBreadcrumb } from "@/components/common/breadcrumb/src/type";
 import { RouteRecordRaw } from "vue-router";
+
+let firstMenu: any = null;
 // 传入userMenus 并将userMenus放进RouteRecordRaw 从而映射每条路由记录
 export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
     const routes: RouteRecordRaw[] = [];
@@ -36,6 +39,11 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
                 // console.log(route);
 
                 if (route) routes.push(route);
+                // 设置了pathMapToMenu 点击哪个菜单对应哪个路由 但是在login.ts配置了path: '/' redirect: /main
+                // 所以当url 变为了8080/ 就匹配不到menus了 所以当输入url为8080/时，将menu赋值给第一个二级菜单 就跳转到第一个二级菜单去
+                if (!firstMenu) {
+                    firstMenu = menu; // 导出firstMenu 在路由守卫routerBeforeEachFunc()里使用firstMenu
+                }
             } else {
                 _recurseGetRoute(menu.children);
             }
@@ -44,3 +52,32 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
     _recurseGetRoute(userMenus);
     return routes;
 }
+
+export function pathMapBreadcrumbs(userMenus: any[], currentPath: string) {
+    const breadcrumbs: IBreadcrumb[] = [];
+    pathMapToMenu(userMenus, currentPath, breadcrumbs);
+    return breadcrumbs;
+}
+
+// /main/system/role  -> type === 2 对应menu
+// 三级路由看下怎么写 等自己把接口写了再测下
+export function pathMapToMenu(
+    userMenus: any[],
+    currentPath: string,
+    breadcrumbs?: IBreadcrumb[]
+): any {
+    for (const menu of userMenus) {
+        if (menu.type === 1) {
+            const findMenu = pathMapToMenu(menu.children ?? [], currentPath);
+            if (findMenu) {
+                breadcrumbs?.push({ name: menu.name });
+                breadcrumbs?.push({ name: findMenu.name });
+                return findMenu;
+            }
+        } else if (menu.type === 2 && menu.url === currentPath) {
+            return menu;
+        }
+    }
+}
+
+export { firstMenu };
