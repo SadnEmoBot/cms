@@ -2,7 +2,7 @@
  * @Description: 根据权限动态配置菜单路由
  * @Author:
  * @Date: 2022-01-12 23:24:28
- * @LastEditTime: 2022-01-14 17:41:43
+ * @LastEditTime: 2022-01-16 16:41:54
  * @LastEditors: Please set LastEditors
  */
 import { IBreadcrumb } from "@/components/common/breadcrumb/src/type";
@@ -78,6 +78,24 @@ export function pathMapToMenu(
             return menu;
         }
     }
+}
+
+// 用户按钮权限
+export function mapMenusToPermissions(userMenus: any[]) {
+    const permissions: string[] = [];
+
+    const _recurseGetPermission = (menus: any[]) => {
+        for (const menu of menus) {
+            if (menu.type === 1 || menu.type === 2) {
+                _recurseGetPermission(menu.children ?? []);
+            } else if (menu.type === 3) {
+                permissions.push(menu.permission);
+            }
+        }
+    };
+    _recurseGetPermission(userMenus);
+
+    return permissions;
 }
 
 export { firstMenu };

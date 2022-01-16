@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-08 18:24:09
- * @LastEditTime: 2022-01-13 00:36:05
+ * @LastEditTime: 2022-01-16 16:47:07
  * @LastEditors: Please set LastEditors
  */
 
@@ -18,7 +18,7 @@ import router from "@/plugins/router";
 
 import { ILoginState, IRootState } from "../type";
 
-import { mapMenusToRoutes } from "@/utils/map-menus";
+import { mapMenusToRoutes, mapMenusToPermissions } from "@/utils/map-menus";
 
 // 改为直接从 type.ts 引入
 // interface ILoginState {
@@ -41,6 +41,8 @@ const loginModule: Module<ILoginState, IRootState> = {
             token: "", // jwt
             userInfo: {}, // 用户信息
             userMenus: [], // 用户菜单信息
+
+            permissions: [], // 用户按钮权限
         };
     },
     actions: {
@@ -93,6 +95,7 @@ const loginModule: Module<ILoginState, IRootState> = {
         },
 
         //加载本地存储数据 但是不知道为什么在f12 存储里刷新了vuex还是会有
+        // 答 用了presistedState插件
         loadLocalData({ commit }) {
             const token = localCache.getCache("token");
             if (token) {
@@ -124,12 +127,16 @@ const loginModule: Module<ILoginState, IRootState> = {
 
             //userMenus => routes
             const routes = mapMenusToRoutes(resData);
-            console.log(routes);
+            // console.log(routes);
 
             // 将routes 放进 main.children
             routes.forEach((route) => {
                 router.addRoute("main", route); //这里看下addRoute()
             });
+
+            // 获取用户按钮权限
+            const permissions = mapMenusToPermissions(resData);
+            state.permissions = permissions;
         },
     },
 };

@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 13:17:32
- * @LastEditTime: 2022-01-12 23:04:14
+ * @LastEditTime: 2022-01-16 20:49:04
  * @LastEditors: Please set LastEditors
  */
 import { createApp } from "vue";
@@ -13,7 +13,7 @@ import router from "./plugins/router";
 // import store from "./store";
 import store from "./plugins/store";
 
-import { ElMessage } from "element-plus"; //引入message组件
+// import { ElMessage } from "element-plus"; //引入message组件
 import "element-plus/dist/index.css"; //引入全局样式
 // import 'element-plus/lib/theme-chalk/index.css' //一样的吧？ 毕竟代码都一样
 
@@ -25,18 +25,27 @@ import * as ElIcons from "@element-plus/icons-vue"; // 是否需要按需导入�
 // import inject from "./plugins/inject";
 import api from "./plugins/api";
 
+import globalRegister from "./global/index";
+
+// import PageContent from "@/components/business/page-content/index";
+
 store.dispatch("user/loadLocalData");
+store.dispatch("root/getInitialDataAction");
 
 // createApp(App).use(store).use(router).use(inject).mount("#app");
 const app = createApp(App);
 
 app.config.globalProperties.$api = api;
 
-app.use(ElMessage);
-app.config.globalProperties.$message = ElMessage; //挂载到app实例上
+// app.use(ElMessage);
+// app.config.globalProperties.$message = ElMessage; //挂载到app实例上
+
+app.use(globalRegister);
 
 for (const name in ElIcons) {
     app.component(name, (ElIcons as any)[name]);
 }
+
+// app.component("page-content", PageContent); //注册全局组件
 
 app.use(store).use(router).mount("#app");

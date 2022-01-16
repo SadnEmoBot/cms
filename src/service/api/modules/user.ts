@@ -2,7 +2,7 @@
  * @Description: 用户权限 请求接口
  * @Author:
  * @Date: 2022-01-03 16:14:27
- * @LastEditTime: 2022-01-09 18:35:43
+ * @LastEditTime: 2022-01-16 21:51:56
  * @LastEditors: Please set LastEditors
  */
 export default [
@@ -33,6 +33,20 @@ export default [
         method: "GET",
         desc: "获取用户菜单",
         path: "/role/{id}/menu",
+        host: "cms",
+    },
+    {
+        name: "addusers",
+        method: "POST",
+        desc: "新建用户",
+        path: "/users",
+        host: "cms",
+    },
+    {
+        name: "editusers",
+        method: "PATCH",
+        desc: "编辑用户",
+        path: "/users/{id}",
         host: "cms",
     },
 ];

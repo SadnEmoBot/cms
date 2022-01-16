@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-13 20:30:03
- * @LastEditTime: 2022-01-14 00:13:52
+ * @LastEditTime: 2022-01-16 19:39:13
  * @LastEditors: Please set LastEditors
  */
 type IFormType = "input" | "password" | "select" | "datepicker";
@@ -17,6 +17,7 @@ export interface IFormItem {
     options?: any[];
     // 针对特殊的属性
     otherOptions?: any;
+    isFormItemHidden?: boolean;
 }
 
 export interface IFormConfig {

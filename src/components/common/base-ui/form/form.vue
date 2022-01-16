@@ -2,7 +2,7 @@
  * @Description: 封装main搜索栏块区域
  * @Author:
  * @Date: 2022-01-13 20:25:45
- * @LastEditTime: 2022-01-14 01:20:36
+ * @LastEditTime: 2022-01-16 19:42:17
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -14,7 +14,12 @@
             <el-row>
                 <template v-for="item in formItems" :key="item.label">
                     <el-col v-bind="colWidth">
-                        <el-form-item :label="item.label" :style="itemStyle">
+                        <el-form-item
+                            v-if="!item.isFormItemHidden"
+                            :label="item.label"
+                            :style="itemStyle"
+                            :rules="item.rules"
+                        >
                             <!-- 输入框 -->
                             <template
                                 v-if="
@@ -102,7 +107,7 @@ export default defineComponent({
         watch(
             formData,
             (newValue: any) => {
-                console.log(newValue);
+                // console.log(newValue);
                 emit("update:modelValue", newValue);
             },
             {
