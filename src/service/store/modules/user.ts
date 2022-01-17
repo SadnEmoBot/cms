@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-08 18:24:09
- * @LastEditTime: 2022-01-16 16:47:07
+ * @LastEditTime: 2022-01-17 17:38:12
  * @LastEditors: Please set LastEditors
  */
 
@@ -46,7 +46,7 @@ const loginModule: Module<ILoginState, IRootState> = {
         };
     },
     actions: {
-        accountLoginAction({ commit }, payload: any) {
+        accountLoginAction({ commit, dispatch }, payload: any) {
             commit("SET_TOKEN", "");
 
             api["login/authLogin"](payload).then(async (res: any) => {
@@ -54,6 +54,9 @@ const loginModule: Module<ILoginState, IRootState> = {
                 Commonid = id;
                 commit("SET_TOKEN", token);
                 localCache.setCache("token", token);
+
+                // 发送初始化的请求(完整的role/department)
+                dispatch("getInitialDataAction", null, { root: true });
 
                 await Promise.all([
                     api["user/getUserInfo"]({
@@ -96,10 +99,14 @@ const loginModule: Module<ILoginState, IRootState> = {
 
         //加载本地存储数据 但是不知道为什么在f12 存储里刷新了vuex还是会有
         // 答 用了presistedState插件
-        loadLocalData({ commit }) {
+
+        //既然用了createPersistedState持久化vuex 就不在main.ts里调用这个函数了
+        loadLocalData({ commit, dispatch }) {
             const token = localCache.getCache("token");
             if (token) {
                 commit("SET_TOKEN", token);
+                // 发送初始化的请求(完整的role/department)
+                dispatch("getInitialDataAction", null, { root: true });
             }
             const userInfo = localCache.getCache("userInfo");
             if (userInfo) {

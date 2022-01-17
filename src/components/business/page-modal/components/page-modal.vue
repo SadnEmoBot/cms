@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-16 18:55:03
- * @LastEditTime: 2022-01-16 21:41:39
+ * @LastEditTime: 2022-01-17 01:05:04
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -15,6 +15,7 @@
             destroy-on-close
         >
             <Form v-bind="modalConfig" v-model="formData"></Form>
+            <slot></slot>
             <template #footer>
                 <span class="dialog-footer">
                     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -45,6 +46,10 @@ export default defineComponent({
             type: Object,
             default: () => ({}),
         },
+        otherInfo: {
+            type: Object,
+            default: () => ({}),
+        },
         pageName: {
             type: String,
             require: true,
@@ -72,14 +77,14 @@ export default defineComponent({
                 // 编辑
                 store.dispatch("system/editPageDataAction", {
                     pageName: props.pageName,
-                    editData: { ...formData.value },
+                    editData: { ...formData.value, ...props.otherInfo },
                     id: props.defaultInfo.id,
                 });
             } else {
                 // 新建
                 store.dispatch("system/createPageDataAction", {
                     pageName: props.pageName,
-                    newData: { ...formData.value },
+                    newData: { ...formData.value, ...props.otherInfo },
                 });
             }
         };

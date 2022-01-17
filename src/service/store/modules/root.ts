@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-16 20:17:27
- * @LastEditTime: 2022-01-16 21:50:32
+ * @LastEditTime: 2022-01-17 14:11:22
  * @LastEditors: Please set LastEditors
  */
 import api from "@/plugins/api";
@@ -17,30 +17,37 @@ const rootModule: Module<IRState, IRootState> = {
             age: 18,
             entireDepartment: [],
             entireRole: [],
+
+            entireMenu: [],
         };
     },
     getters: {},
     actions: {
         async getInitialDataAction({ commit }) {
-            // 1.请求部门和角色数据
+            // 1.1 请求部门和角色数据
             const departmentResult = await api["department/getDepartmentList"]({
                 offset: 0,
                 size: 1000,
             });
-            // console.log(departmentResult);
-
+            console.log(departmentResult);
             const { list: departmentList } = departmentResult.data;
+
+            // 1.2 请求角色数据
             const roleResult = await api["system/role"]({
                 offset: 0,
                 size: 1000,
             });
             // console.log(roleResult);
-
             const { list: roleList } = roleResult.data;
+
+            // 1.3 请求菜单数据
+            const menuResult = await api["system/menu"]();
+            const { list: menuList } = menuResult.data;
 
             // 2.保存数据
             commit("SET_DEPARTMENT_LIST", departmentList);
             commit("SET_ROLE_LIST", roleList);
+            commit("SET_MENU_LIST", menuList);
         },
     },
     mutations: {
@@ -49,6 +56,9 @@ const rootModule: Module<IRState, IRootState> = {
         },
         SET_ROLE_LIST(state, resData: any[]) {
             state.entireRole = resData;
+        },
+        SET_MENU_LIST(state, resData: any[]) {
+            state.entireMenu = resData;
         },
     },
 };

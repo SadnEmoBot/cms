@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-02 13:17:32
- * @LastEditTime: 2022-01-16 20:49:04
+ * @LastEditTime: 2022-01-17 17:38:16
  * @LastEditors: Please set LastEditors
  */
 import { createApp } from "vue";
@@ -30,7 +30,6 @@ import globalRegister from "./global/index";
 // import PageContent from "@/components/business/page-content/index";
 
 store.dispatch("user/loadLocalData");
-store.dispatch("root/getInitialDataAction");
 
 // createApp(App).use(store).use(router).use(inject).mount("#app");
 const app = createApp(App);

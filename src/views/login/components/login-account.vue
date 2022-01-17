@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-08 16:08:19
- * @LastEditTime: 2022-01-10 00:55:29
+ * @LastEditTime: 2022-01-17 15:01:18
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -91,6 +91,7 @@ export default defineComponent({
                         localCache.deleteCache("name");
                         localCache.deleteCache("password");
                     }
+
                     //2. 开始进行登录验证
                     store.dispatch("user/accountLoginAction", { ...account });
                     // 把登录验证写在vuex user.ts的action里面 然后在里面发送请求,老师是这样做的 那我也这样做的 因为在vue组件里暂时拿不到...mapMutations

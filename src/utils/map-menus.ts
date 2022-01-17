@@ -2,7 +2,7 @@
  * @Description: 根据权限动态配置菜单路由
  * @Author:
  * @Date: 2022-01-12 23:24:28
- * @LastEditTime: 2022-01-16 16:41:54
+ * @LastEditTime: 2022-01-17 13:12:23
  * @LastEditors: Please set LastEditors
  */
 import { IBreadcrumb } from "@/components/common/breadcrumb/src/type";
@@ -96,6 +96,23 @@ export function mapMenusToPermissions(userMenus: any[]) {
     _recurseGetPermission(userMenus);
 
     return permissions;
+}
+
+export function menuMapLeafKeys(menuList: any[]) {
+    const leafKeys: number[] = [];
+
+    const _recurseGetLeaf = (menuList: any[]) => {
+        for (const menu of menuList) {
+            if (menu.children) {
+                _recurseGetLeaf(menu.children);
+            } else {
+                leafKeys.push(menu.id);
+            }
+        }
+    };
+    _recurseGetLeaf(menuList);
+
+    return leafKeys;
 }
 
 export { firstMenu };

@@ -2,7 +2,7 @@
  * @Description: 路由拦截器
  * @Author:
  * @Date: 2022-01-07 17:27:27
- * @LastEditTime: 2022-01-13 22:54:58
+ * @LastEditTime: 2022-01-17 22:03:37
  * @LastEditors: Please set LastEditors
  */
 import localCache from "@/utils/cache";
@@ -13,8 +13,9 @@ export function routerBeforeEachFunc(to: any) {
     if (to.path !== "/login") {
         const token = localCache.getCache("token");
         if (!token) {
-            return "./login";
+            return "/login";
         }
+        // debugger;
     }
     // const token = localCache.getCache("token");
     // let { requiresAuth } = to.meta;
@@ -35,6 +36,8 @@ export function routerBeforeEachFunc(to: any) {
     }
 
     if (to.path === "/main") {
+        console.log(firstMenu.url);
+
         return firstMenu.url;
     }
 }

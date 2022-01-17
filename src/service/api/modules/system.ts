@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-15 16:35:04
- * @LastEditTime: 2022-01-16 18:30:16
+ * @LastEditTime: 2022-01-17 00:04:34
  * @LastEditors: Please set LastEditors
  */
 export default [
@@ -53,5 +53,34 @@ export default [
         path: "/users/{id}",
         host: "cms",
         showLoading: true,
+    },
+
+    {
+        name: "addusers",
+        method: "POST",
+        desc: "新建用户",
+        path: "/users",
+        host: "cms",
+    },
+    {
+        name: "editusers",
+        method: "PATCH",
+        desc: "编辑用户",
+        path: "/users/{id}",
+        host: "cms",
+    },
+    {
+        name: "addrole",
+        method: "POST",
+        desc: "新建角色",
+        path: "/role",
+        host: "cms",
+    },
+    {
+        name: "editrole",
+        method: "PATCH",
+        desc: "编辑角色",
+        path: "/role/{id}",
+        host: "cms",
     },
 ];

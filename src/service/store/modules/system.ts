@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-15 16:05:05
- * @LastEditTime: 2022-01-16 21:52:30
+ * @LastEditTime: 2022-01-17 00:03:36
  * @LastEditors: Please set LastEditors
  */
 import api from "@/plugins/api";
@@ -50,7 +50,7 @@ const systemModule: Module<ISystemState, IRootState> = {
             const apiName = `system/${pageName}`;
             // 1. 发送网络请求
             api[apiName](payload.queryInfo).then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 const { list, totalCount } = res.data;
 
                 commit(`SET_${pageName.toUpperCase()}_LIST`, list);
@@ -80,7 +80,7 @@ const systemModule: Module<ISystemState, IRootState> = {
         async createPageDataAction({ dispatch }, payload: any) {
             // 1.创建数据的请求
             const { pageName, newData } = payload;
-            const apiName = `user/add${pageName}`;
+            const apiName = `system/add${pageName}`;
             await api[apiName]({
                 ...newData,
             });
@@ -98,7 +98,7 @@ const systemModule: Module<ISystemState, IRootState> = {
         async editPageDataAction({ dispatch }, payload: any) {
             // 1.编辑数据的请求
             const { pageName, editData, id } = payload;
-            const apiName = `user/edit${pageName}`;
+            const apiName = `system/edit${pageName}`;
             await api[apiName]({
                 ...editData,
                 id: id,

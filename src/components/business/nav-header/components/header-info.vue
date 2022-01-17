@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-13 23:08:06
- * @LastEditTime: 2022-01-13 23:40:32
+ * @LastEditTime: 2022-01-17 16:28:33
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -17,7 +17,7 @@
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
-                    <el-dropdown-item
+                    <el-dropdown-item @click="handleExitClick"
                         >退出登录&nbsp;&nbsp;&nbsp;<el-icon
                             ><circle-close /></el-icon
                     ></el-dropdown-item>
@@ -34,13 +34,23 @@ import { defineComponent } from "vue";
 import { toRaw } from "@vue/reactivity";
 import { useStore } from "@/service/store/type";
 
+import { useRouter } from "vue-router";
+import localCache from "@/utils/cache";
+
 export default defineComponent({
     setup() {
         const store = useStore();
         const name = toRaw(store.state.user.userInfo.name);
 
+        const router = useRouter();
+        const handleExitClick = () => {
+            localCache.deleteCache("token");
+            router.push("/main");
+        };
+
         return {
             name,
+            handleExitClick,
         };
     },
 });

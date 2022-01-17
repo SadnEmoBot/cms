@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-12 23:45:39
- * @LastEditTime: 2022-01-16 21:36:30
+ * @LastEditTime: 2022-01-17 15:31:14
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -78,7 +78,7 @@ export default defineComponent({
                 (item) => item.field === "departmentId"
             );
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            departmentItem!.options = store.state.root.entireDepartment.map(
+            departmentItem!.options = store.state.entireDepartment.map(
                 (item) => {
                     return { title: item.name, value: item.id };
                 }
@@ -88,7 +88,7 @@ export default defineComponent({
                 (item) => item.field === "roleId"
             );
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            roleItem!.options = store.state.root.entireRole.map((item) => {
+            roleItem!.options = store.state.entireRole.map((item) => {
                 return { title: item.name, value: item.id };
             });
             return modalConfig;
