@@ -6,6 +6,7 @@ declare global {
   const ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
   const ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElCard: typeof import('element-plus/es')['ElCard']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElCol: typeof import('element-plus/es')['ElCol']
   const ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
@@ -34,6 +35,7 @@ declare global {
   const ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
   const ElTabPane: typeof import('element-plus/es')['ElTabPane']
   const ElTabs: typeof import('element-plus/es')['ElTabs']
+  const ElTooltip: typeof import('element-plus/es')['ElTooltip']
   const ElTree: typeof import('element-plus/es')['ElTree']
 }
 export {}

@@ -2,7 +2,7 @@
  * @Description: 封装main搜索栏块区域
  * @Author:
  * @Date: 2022-01-13 20:25:45
- * @LastEditTime: 2022-01-16 19:42:17
+ * @LastEditTime: 2022-01-17 23:53:34
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -45,6 +45,7 @@
                                         v-for="option in item.options"
                                         :key="option.value"
                                         :value="option.value"
+                                        :label="option.title"
                                         >{{ option.title }}</el-option
                                     >
                                 </el-select>
