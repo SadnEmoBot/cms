@@ -2,7 +2,7 @@
  * @Description: 代理配置
  * @Author:
  * @Date: 2022-01-05 17:21:23
- * @LastEditTime: 2022-01-08 22:21:00
+ * @LastEditTime: 2022-01-19 20:07:37
  * @LastEditors: Please set LastEditors
  */
 // const currentEnv = "development";
@@ -20,7 +20,7 @@
 //     },
 // };
 module.exports = {
-    "^/api": {
+    "/api": {
         target: "http://152.136.185.210:5000",
         pathRewrite: {
             "^/api": "",
