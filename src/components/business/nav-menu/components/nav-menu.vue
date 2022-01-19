@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-10 01:30:58
- * @LastEditTime: 2022-01-13 23:32:34
+ * @LastEditTime: 2022-01-19 17:02:08
  * @LastEditors: Please set LastEditors
 -->
 <template>
@@ -148,7 +148,7 @@ export default defineComponent({
         }
     }
 
-    ::v-deep .el-submenu__title {
+    :deep .el-submenu__title {
         background-color: #001529 !important;
     }
 
