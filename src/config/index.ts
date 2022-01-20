@@ -2,7 +2,7 @@
  * @Description: 全局配置
  * @Author:
  * @Date: 2022-01-03 15:28:11
- * @LastEditTime: 2022-01-05 17:52:06
+ * @LastEditTime: 2022-01-20 21:11:15
  * @LastEditors: Please set LastEditors
  */
 // 当前宿主平台
@@ -18,6 +18,7 @@ export const MONITOR_ENABLE = true;
 export const ROUTER_DEFAULT_CONFIG = {
     mode: "history",
     // base: URL_PREFIX, //配置路由的时候再打开
+    base: "/cms",
 };
 
 // axios 默认配置
