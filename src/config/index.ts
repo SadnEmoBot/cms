@@ -2,7 +2,7 @@
  * @Description: 全局配置
  * @Author:
  * @Date: 2022-01-03 15:28:11
- * @LastEditTime: 2022-01-20 21:11:15
+ * @LastEditTime: 2022-01-21 19:46:00
  * @LastEditors: Please set LastEditors
  */
 // 当前宿主平台
@@ -16,7 +16,7 @@ export const AJAX_LOCALLY_ENABLE = false;
 export const MONITOR_ENABLE = true;
 // 路由默认配置，路由表并不从此注入
 export const ROUTER_DEFAULT_CONFIG = {
-    mode: "history",
+    mode: "hash",
     // base: URL_PREFIX, //配置路由的时候再打开
     base: "/cms",
 };
