@@ -18,7 +18,7 @@ const vueConfig = {
     //     process.env.NODE_ENV === "development"
     //         ? URL_PREFIX
     //         : process.env.VUE_APP_CDNURL + URL_PREFIX,
-    publicPath: "./",
+    publicPath: "/",
     configureWebpack: {
         plugins: [
             AutoImport({
