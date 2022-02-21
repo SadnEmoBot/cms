@@ -11,13 +11,14 @@ const Components = require("unplugin-vue-components/webpack");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 
 const configProxy = require("./config/proxy.ts");
-const URL_PREFIX = "/cms";
+// const URL_PREFIX = "/cms";
 
 const vueConfig = {
-    publicPath:
-        process.env.NODE_ENV === "development"
-            ? URL_PREFIX
-            : process.env.VUE_APP_CDNURL + URL_PREFIX,
+    // publicPath:
+    //     process.env.NODE_ENV === "development"
+    //         ? URL_PREFIX
+    //         : process.env.VUE_APP_CDNURL + URL_PREFIX,
+    publicPath: "./",
     configureWebpack: {
         plugins: [
             AutoImport({

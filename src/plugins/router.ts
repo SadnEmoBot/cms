@@ -17,7 +17,7 @@ import { routerBeforeEachFunc } from "../config/interceptors/router";
 // const routerInstance = new Router({
 const routerInstance = createRouter({
     // ...ROUTER_DEFAULT_CONFIG,
-    history: createWebHistory("/cms"),
+    history: createWebHistory("/cms"), //决定路由前缀 localhost:8081/cms/login -> /cmss/login
     routes: ROUTES,
 });
 // 注入拦截器
