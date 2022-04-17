@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-12 17:22:34
- * @LastEditTime: 2022-01-18 00:50:58
+ * @LastEditTime: 2022-04-16 14:36:48
  * @LastEditors: Please set LastEditors
  */
 import { Store, useStore as useVuexStore } from "vuex";
@@ -25,6 +25,10 @@ export interface IChartState {
     addressGoodsSale: any[];
     goodsSaleTop10: any[];
     topPanelDatas: any[];
+
+    goodsSaleCount: any[];
+    trend: any[];
+    map: any[];
 }
 export interface IRootState {
     // 暂时还没有根state 都是直接写在modules里的

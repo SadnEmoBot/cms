@@ -10,6 +10,7 @@ export default [
         name: "ADDRESS",
         value: {
             cms: process.env.VUE_APP_BASECMS,
+            august: process.env.VUE_APP_AUGUST,
         },
     },
 ];

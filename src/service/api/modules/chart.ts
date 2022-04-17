@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-17 23:38:52
- * @LastEditTime: 2022-01-18 00:53:53
+ * @LastEditTime: 2022-04-10 13:38:55
  * @LastEditors: Please set LastEditors
  */
 export default [
@@ -48,5 +48,32 @@ export default [
         desc: "获取数据",
         path: "/goods/amount/list",
         host: "cms",
+    },
+
+    {
+        name: "getGoodsSaleCount",
+        method: "GET",
+        desc: "获取数据",
+        // path: "/goods/salecount",
+        path: "/goodsSaleCount",
+        host: "august",
+    },
+
+    {
+        name: "getTrend",
+        method: "GET",
+        desc: "获取数据",
+        // path: "/goods/salecount",
+        path: "/trend",
+        host: "august",
+    },
+
+    {
+        name: "getMap",
+        method: "GET",
+        desc: "获取数据",
+        // path: "/goods/salecount",
+        path: "/map",
+        host: "august",
     },
 ];

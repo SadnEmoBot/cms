@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-03 00:33:04
- * @LastEditTime: 2022-01-08 23:32:27
+ * @LastEditTime: 2022-04-04 18:04:06
  * @LastEditors: Please set LastEditors
  */
 // import axios from "axios";
@@ -73,7 +73,6 @@ class MakeApi {
             const isMock = process.env.NODE_ENV === "production" ? false : mock;
             const url = isMock ? mockBaseURL + "/mock/35" + path : path;
             const baseURL = host ? _const["HOST/ADDRESS"][host] : "";
-            // console.log(baseURL);
             // debugger;
             // const baseURL = "http://123.207.32.32:8000";
 

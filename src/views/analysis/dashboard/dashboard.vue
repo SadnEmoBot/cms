@@ -83,6 +83,8 @@ export default defineComponent({
 
         // 2.获取顶部PanelData
         const topPanelData = computed(() => store.state.chart.topPanelDatas);
+
+        // 3.获取中部数据
         const categoryGoodsCount = computed(() => {
             return store.state.chart.categoryGoodsCount.map((item: any) => {
                 return { value: item.goodsCount, name: item.name };
@@ -93,6 +95,13 @@ export default defineComponent({
                 return { value: item.saleCount, name: item.name };
             });
         });
+        const addressGoodsSale = computed(() => {
+            return store.state.chart.addressGoodsSale.map((item: any) => {
+                return { name: item.address, value: item.count };
+            });
+        });
+
+        // 4.获取底部数据
         const categoryGoodsSale = computed(() => {
             const goodsSale = store.state.chart.categoryGoodsSale;
             const labels: string[] = [];
@@ -102,11 +111,6 @@ export default defineComponent({
                 values.push(item.goodsCount);
             }
             return { labels, values };
-        });
-        const addressGoodsSale = computed(() => {
-            return store.state.chart.addressGoodsSale.map((item: any) => {
-                return { name: item.address, value: item.count };
-            });
         });
 
         return {

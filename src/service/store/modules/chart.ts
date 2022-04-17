@@ -2,7 +2,7 @@
  * @Description:
  * @Author:
  * @Date: 2022-01-17 23:12:54
- * @LastEditTime: 2022-01-18 00:55:59
+ * @LastEditTime: 2022-04-16 14:37:40
  * @LastEditors: Please set LastEditors
  */
 import api from "@/plugins/api";
@@ -20,6 +20,10 @@ const chartModule: Module<IChartState, IRootState> = {
 
             goodsSaleTop10: [],
             topPanelDatas: [],
+            // 新接口测试
+            goodsSaleCount: [],
+            trend: [],
+            map: [],
         };
     },
     getters: {},
@@ -45,6 +49,16 @@ const chartModule: Module<IChartState, IRootState> = {
             api["chart/getGoodsSaleTop10"]().then((res: any) => {
                 commit("SET_CATEGORY_GOODS_SALE_TOP", res.data);
             });
+
+            api["chart/getGoodsSaleCount"]().then((res: any) => {
+                commit("SET_GOODS_SALE_COUNT", res.data);
+            });
+            api["chart/getTrend"]().then((res: any) => {
+                commit("SET_TREND", res.data);
+            });
+            api["chart/getMap"]().then((res: any) => {
+                commit("SET_MAP", res.data);
+            });
         },
     },
     mutations: {
@@ -66,6 +80,15 @@ const chartModule: Module<IChartState, IRootState> = {
         },
         SET_TOP_PANEL_DATA(state, resData: any[]) {
             state.topPanelDatas = resData;
+        },
+        SET_GOODS_SALE_COUNT(state, resData: any[]) {
+            state.goodsSaleCount = resData.sort((a, b) => a.value - b.value);
+        },
+        SET_TREND(state, resData: any[]) {
+            state.trend = resData;
+        },
+        SET_MAP(state, resData: any[]) {
+            state.map = resData;
         },
     },
 };
